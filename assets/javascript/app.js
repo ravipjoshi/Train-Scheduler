@@ -37,14 +37,17 @@
     var firstTrnTime = $("#first-train-input").val().trim();
     var trnFreq = $("#frequancy-input").val().trim();
     var timeConversion = moment(firstTrnTime, "HH:mm").subtract(1, "years");
-    console.log(timeConversion);
-    var currentTime = moment();
-    console.log(currentTime);
+    //console.log(timeConversion);
+    var temp = moment();
+    var currentTime = moment(temp).format("hh:mm");
+    
+    //console.log(currentTime);
     var diffTime = moment().diff(moment(timeConversion), "minutes");
     var tRemainder = diffTime % trnFreq;
     minAway = trnFreq - tRemainder;
-    var nextTrain = moment().add(minAway, "minutes");
-    console.log()
+    var temp2 = moment().add(minAway, "minutes");
+    var nextTrain = moment(temp2).format("hh:mm");
+    //console.log()
 
     // Creates local "temporary" object for holding Train data
     var newTrain = {
@@ -58,14 +61,14 @@
     database.ref().push(newTrain);
   
     // Logs everything to console
-    console.log(newTrain.name);
-    console.log(newTrain.destination);
-    console.log(newTrain.first);
-    console.log(newTrain.frequency);
-    console.log(newTrain.nextarival);
-    console.log(newTrain.minAway);
+    // console.log(newTrain.name);
+    // console.log(newTrain.destination);
+    // console.log(newTrain.first);
+    // console.log(newTrain.frequency);
+    // console.log(newTrain.nextarival);
+    // console.log(newTrain.minAway);
   
-    alert("Train successfully added");
+  //  alert("Train successfully added");
   
     // Clears all of the text-boxes
     $("#train-name-input").val("");
@@ -75,7 +78,7 @@
   });
   
   database.ref().on("child_added", function(childSnapshot) {
-    console.log(childSnapshot.val());
+    //console.log(childSnapshot.val());
   
     // Store everything into a variable.
     var dbtrainName = childSnapshot.val().name;
@@ -87,10 +90,10 @@
   
   
     // train Info
-    console.log(name);
-    console.log(destination);
-    console.log(first);
-    console.log(frequency);
+    // console.log(name);
+    // console.log(destination);
+    // console.log(first);
+    // console.log(frequency);
 
   
   
@@ -104,8 +107,6 @@
       $("<td>").text(dbnextArrival),
       $("<td>").text(dbminAway),
 
-     // $("<td>").text(empRate),
-    //  $("<td>").text(empBilled)
     );
   
     // Append the new row to the table
